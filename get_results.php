@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-include '../../subtitles_db_connect.php';
+include '../subtitles_db_connect.php';
 
 $request = json_decode(file_get_contents('php://input', true));
 $year = $request->year;
