@@ -15,7 +15,7 @@ to search and display movie subtitles. I cannot
 provide the data.**
 
 2. Initialize your Google Firebase
-⋅⋅* Create Google Firebase account for free
+  * Create Google Firebase account for free
   * Set up a Firebase app with authentication
   * Edit lines 36-44 in index.html to reflect your Firebase API
 
