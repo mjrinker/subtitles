@@ -33,3 +33,15 @@ $DATABASE = 'database';
 ?>
 ```
 ⋅⋅* Edit the variables to contain your database and auth information
+
+
+## About this version
+
+**Aegean** is the first version of the platform.
+Features include:
+
+1. AngularJS architecture
+2. PHP server-side queries to MySQL database
+3. Authentication via Google Firebase
+4. Bootstrap 4 styling
+5. Responsive web design for any device
