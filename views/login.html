@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="css/tutorial.css">
+<script src="js/validation.js"></script>
+<section class="card login my-7 validate">
+	<form name="loginform" ng-submit="login()" novalidate>
+		<div class="textintro">
+			<h1>{{ title }}</h1>
+			<p class="message" ng-show="message">{{ message }}</p>
+		</div><!-- textintro -->
+
+		<fieldset>
+			<input type="email" name="email" placeholder="Email" ng-model="user.email" ng-required="true" />
+			<p><span class="error validationerror" ng-show="loginform.email.$invalid && loginform.email.$touched">Must be a valid email</span></p>
+			<input type="password" name="password" placeholder="Password" ng-model="user.password" ng-required="true" />
+			<p><span class="error validationerror" ng-show="loginform.password.$invalid && loginform.password.$touched">Password is required</span></p>
+		</fieldset>
+
+		<button type="submit" class="btn" ng-disabled="loginform.$invalid">Log In</button>
+		<p>or <a ng-href="#!/register">register</a></p>
+	</form><!-- loginform -->
+</section><!-- login card -->

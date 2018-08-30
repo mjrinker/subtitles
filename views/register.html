@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="css/tutorial.css">
+<script src="js/validation.js"></script>
+<section class="card register my-7 validate">
+	<form name="registerform" ng-submit="register()" novalidate>
+		<div class="textintro">
+			<h1>{{ title }}</h1>
+			<p class="message" ng-show="message">{{ message }}</p>
+		</div><!-- textintro -->
+
+		<fieldset>
+			<input type="firstname" name="firstname" placeholder="First Name" ng-model="user.firstname" ng-required="true" />
+			<p><span class="error validationerror" ng-show="registerform.firstname.$invalid && registerform.firstname.$touched">You must fill out your first name</span></p>
+			<input type="lastname" name="lastname" placeholder="Last Name" ng-model="user.lastname" ng-required="true" />
+			<p><span class="error validationerror" ng-show="registerform.lastname.$invalid && registerform.lastname.$touched">You must fill out your last name</span></p>
+			<input type="email" name="email" placeholder="Email" ng-model="user.email" ng-required="true" />
+			<p><span class="error validationerror" ng-show="registerform.email.$invalid && registerform.email.$touched">Must be a valid email</span></p>
+			<input type="password" name="password" placeholder="Password" ng-model="user.password" ng-minlength="passwordMinLength" ng-required="true" />
+			<p><span class="error validationerror" ng-show="registerform.password.$invalid && registerform.password.$touched">Password must be at least {{ passwordMinLength }} characters.</span></p>
+		</fieldset>
+
+		<button type="submit" class="btn" ng-disabled="registerform.$invalid">Register</button>
+		<p>or <a ng-href="#!/login">log in</a></p>
+	</form><!-- registerform -->
+</section><!-- register card -->

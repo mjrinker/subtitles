@@ -1,0 +1,113 @@
+<div class="container">
+
+	<section class="card d-print-none mb-5 border">
+
+		<div class="card-header d-none d-md-block bg-honeydew">
+			<div class="display-5 card-title text-darkslategray">{{ title }}</div>
+		</div><!-- card-header -->
+
+		<form name="subs-search" novalidate ng-submit="sendData()">
+			<div class="card-body">
+				<fieldset class="form-group">
+					<div class="form-group">
+						<label class="form-control-label card-text" for="searchbox">Search</label>
+						<input type="text" id="searchbox" class="form-control form-control-lg" placeholder="Search" autofocus ng-model="query" ng-change="sendData()" ng-model-options="{ debounce: 500 }" />
+					</div><!-- form-group -->
+					<div class="form-group form-row justify-content-between">
+						<div class="form-group col-md">
+							<label class="form-control-label card-text" for="year">Year</label>
+							<input type="text" id="year" class="form-control" placeholder="Year" ng-model="year" ng-change="sendData()" ng-model-options="{ debounce: 500 }" />
+						</div><!-- form-group -->
+						<div class="form-group col-md">
+							<label class="form-control-label card-text" for="inc_time">Increment time</label>
+							<div class="input-group text-center" id="inc_time">
+								<input type="number" class="form-control border-right-0" placeholder="h" ng-model="inc_h" ng-change="incTime()">
+								<div class="input-group-text border-right-0 rounded-right-0 rounded-left-0">:</div>
+								<input type="number" class="form-control border-right-0" placeholder="m" min="-59" max="59" ng-model="inc_m" ng-change="incTime()">
+								<div class="input-group-text border-right-0 rounded-right-0 rounded-left-0">:</div>
+								<input type="number" class="form-control border-right-0" placeholder="s" min="-59" max="59" ng-model="inc_s" ng-change="incTime()">
+								<div class="input-group-text border-right-0 rounded-right-0 rounded-left-0">.</div>
+								<input type="number" class="form-control" placeholder="ms" min="-999" max="999" ng-model="inc_ms" ng-change="incTime()">
+							</div>
+							<!-- <input type="text" id="inc_time" class="form-control" placeholder="Increment time" ng-model="inc_time" /> -->
+						</div><!-- form-group -->
+					</div><!-- form-group -->
+				</fieldset><!-- fieldset -->
+			</div><!-- card-body -->
+
+		</form><!-- subs-search -->
+	</section><!-- card -->
+
+</div><!-- container -->
+
+
+<section class="row text-center justify-content-center subs-results" ng-show="query">
+	<div class="col-9">
+
+	<div ng-show="year == 0 || year > 1800"><span>Results for "{{ query }}" in films from {{ year }}</span></div>
+	<div class="lds-ellipsis" ng-hide="loaded"><div></div><div></div><div></div><div></div></div><!-- loader -->
+
+	<div class="db-results d-print-none" ng-show="subtitles && loaded">
+		<p ng-if="show_results">Showing {{ filtered.length }} of {{ subtitles.length }} results</p>
+		<p ng-if="!show_results">Showing 0 of {{ subtitles.length }} results</p>
+		<p class="mb-4">Show <input class="text-center px-1 py-1" type="text" size="1" ng-model="items_per_page" ng-change="defaultPerPage()" /> per page</p>
+
+		<div class="row justify-content-center">
+			<div class="col">
+				<dir-pagination-controls template-url="views/dirPagination.tpl.html"></dir-pagination-controls>
+			</div>
+		</div>
+
+		<div class="text-center my-4" ng-show="show_results">
+
+			<div class="row thead mb-2">
+				<div class="d-none d-lg-block col-lg-1 order-lg-1 py-1 bg-teal text-ivory rounded-lg-left">Movie ID</div>
+				<div class="d-none d-lg-block col-lg-1 order-lg-2 py-1 bg-goldenrod text-dark">Subtitle ID</div>
+				<div class="d-none d-lg-block col-lg-2 order-lg-4 py-1 bg-mediumseagreen text-light">Start Time</div>
+				<div class="d-none d-lg-block col-lg-6 order-lg-3 py-1 bg-dark text-snow">Line</div>
+				<div class="d-none d-lg-block col-lg-2 order-lg-5 py-1 bg-firebrick text-light rounded-lg-right">End Time</div>
+			</div><!-- thead -->
+
+
+			<a class="row mb-2" href="#!/movie/{{ sub.movie }}/year/{{ year }}"
+				dir-paginate="sub in subtitles | itemsPerPage: items_per_page as filtered">
+				<div class="d-none d-sm-block col-sm-6 col-md-3 col-lg-1 order-sm-1 order-md-1 order-lg-1 py-1 bg-mediumaquamarine text-ivory rounded-sm-top-left rounded-lg-left">{{ sub.movie }}</div>
+				<div class="d-none d-sm-block col-sm-6 col-md-3 col-lg-1 order-sm-2 order-md-2 order-lg-2 py-1 rounded-sm-top-right rounded-md-0 bg-khaki text-dark">{{ sub.index }}</div>
+				<div class="col-12 col-sm-6 col-md-3 col-lg-2 order-sm-4 order-md-3 order-lg-4 py-1 bg-darkseagreen text-light rounded-top rounded-sm-0 rounded-sm-bottom-left rounded-md-0">{{ addTimes(sub.start, inc_time) | time}}</div>
+				<div class="col-12 col-lg-6 order-sm-3 order-md-5 order-lg-3 py-1 bg-dimgray text-snow rounded-md-bottom rounded-lg-0">{{ sub.lines }}</div>
+				<div class="col-12 col-sm-6 col-md-3 col-lg-2 order-sm-5 order-md-4 order-lg-5 py-1 bg-indianred text-light rounded-bottom rounded-sm-0 rounded-sm-bottom-right rounded-md-0 rounded-md-top-right rounded-lg-right">{{ addTimes(sub.end, inc_time) | time}}</div>
+			</a><!-- row -->
+
+		</div><!-- table -->
+
+		<dir-pagination-controls template-url="views/dirPagination.tpl.html"></dir-pagination-controls>
+
+	</div><!-- db-results d-print-none -->
+
+	<!-- When printed to paper, show all results -->
+	<div class="db-results d-none d-print-block" ng-show="subtitles && loaded">
+		<p>Showing {{ subtitles.length }} of {{ subtitles.length }} results</p>
+		<div class="container table">
+			<div class="row no-gutters justify-content-center" ng-repeat="sub in subtitles">
+				<div class="col-xl-2">
+					<div class="row">
+						<div class="col-3 offset-5 bg-info text-light rounded-left">{{ sub.movie }}</div>
+						<div class="col-3 bg-warning text-dark">{{ sub.index }}</div>
+					</div>
+				</div>
+				<div class="col-xl-6">
+					<div class="row">
+						<div class="col-12 bg-dark text-light">{{ sub.lines }}</div>
+					</div>
+				</div>
+				<div class="col-xl-2">
+					<div class="row">
+						<div class="col-5 bg-success text-light">{{ addTimes(sub.start, inc_time) | time}}</div>
+						<div class="col-5 bg-danger text-light rounded-right">{{ addTimes(sub.end, inc_time) | time}}</div>
+					</div>
+				</div>
+			</div><!-- row -->
+		</div><!-- table -->
+	</div><!-- db-results d-print-block -->
+	</div><!-- col -->
+</section><!-- subs-results -->

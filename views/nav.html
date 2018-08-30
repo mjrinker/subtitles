@@ -1,0 +1,31 @@
+<nav class="navbar bg-darkslategray navbar-dark navbar-expand-sm fixed-top d-print-none">
+	<div class="container">
+
+		<a class="navbar-brand mr-auto" ng-href="#!/home">SubDBX</a>
+
+		<button class="navbar-toggler" type="button"
+		data-toggle="collapse" data-target="#collapsable-nav"
+		aria-controls="collapsable-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="collapsable-nav">
+			<div class="navbar-nav ml-sm-auto">
+				<a class="nav-item nav-link" ng-hide="currentUser" ng-href="#!/login">Log In</a>
+				<a class="nav-item nav-link" ng-hide="currentUser" ng-href="#!/register">Register</a>
+				<a class="nav-item nav-link d-sm-none" ng-href="#!/home">Home</a>
+				<div class="dropdown" ng-show="currentUser">
+					<a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" id="user-dropdown"
+					aria-haspopup="true" aria-expanded="false">Hi {{ currentUser.firstname }}</a>
+					<div class="dropdown-menu" aria-labelledby="user-dropdown">
+						<a class="dropdown-item ng-hide" ng-href="#!/account">My Account</a>
+						<a class="dropdown-item ng-hide" ng-href="#!/bookmarks">Bookmarks</a>
+						<a class="dropdown-item ng-hide" ng-href="#!/history">History</a>
+						<a class="dropdown-item" ng-href="#!/login" ng-show="currentUser" ng-click="logout()">Log Out</a>
+					</div><!-- user-dropdown items -->
+				</div><!-- dropdown -->
+			</div><!-- navbar-nav -->
+		</div><!-- collapse -->
+
+	</div><!-- container -->
+</nav><!-- navbar -->
