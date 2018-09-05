@@ -37,3 +37,19 @@
 	width: 100%;
 	height: 100%;
 }
+
+a {
+  color: #4f8787;
+}
+
+a:hover {
+  color: #406d6d;
+}
+
+.results-table a {
+	text-decoration: none;
+}
+
+.results-table a:hover {
+	text-decoration: none;
+}
