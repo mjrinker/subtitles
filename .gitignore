@@ -1,2 +1,2 @@
 *.sublime-workspace
-error_log
+*error_log*
