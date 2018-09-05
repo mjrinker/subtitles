@@ -4,18 +4,18 @@ header("Access-Control-Allow-Origin: *");
 include '../../subtitles_db_connect.php';
 
 $request = "json_decode(file_get_contents('php://input', true))";
-$movie = 'Panic';
-$search = 'trip';
+$movie = 'panic';
+$search = '';
 $year = 1950;
 
 if ((!$search || $search == "") && (!$movie || $movie == "")) {
     echo('{"records":[], "year": ' . $year . '}');
     exit();
 }
-
-$conn = new mysqli($HOST, $USER, $PASSWORD, $DATABASE);
-
-$result = $conn->query("SELECT y.*, m.movie_index, m.imdb_id, i.primary_title, i.imdb_id FROM en_year" . $year . " y, movie_index m, imdb_title_basics i WHERE " . str_repeat("LOWER(CONCAT_WS(' ', y.line1, y.line2, y.line3, y.line4, y.line5, y.line6, y.line7, y.line8, y.line9, y.line10)) LIKE '%" . strtolower($search) . "%' AND ", (int)($search != '')) . str_repeat("AND i.primary_title LIKE '" . strtolower($movie) . "%' AND ", (int)($movie != '')) . "y.movie_index = m.movie_index AND m.imdb_id = i.imdb_id;");
+else {
+    $conn = new mysqli($HOST, $USER, $PASSWORD, $DATABASE);
+    $result = $conn->query("SELECT y.*, m.movie_index, m.imdb_id, i.primary_title, i.imdb_id FROM en_year" . $year . " y, movie_index m, imdb_title_basics i WHERE " . str_repeat("LOWER(CONCAT_WS(' ', y.line1, y.line2, y.line3, y.line4, y.line5, y.line6, y.line7, y.line8, y.line9, y.line10)) LIKE '%" . strtolower($search) . "%' AND ", (int)($search != '')) . str_repeat("i.primary_title LIKE '" . strtolower($movie) . "%' AND ", (int)($movie != '')) . "y.movie_index = m.movie_index AND m.imdb_id = i.imdb_id" . str_repeat(" AND y.sub_index = 1", (int)($search=='')) . ";");
+}
 
 $output = "";
 while($rs = $result->fetch_array(MYSQLI_ASSOC)) {

@@ -8,9 +8,9 @@ myApp.controller('SubtitlesController',
 		$scope.inc_m = 0;
 		$scope.inc_s = 0;
 		$scope.inc_ms = 0;
-		$scope.movie;
-		$scope.year = 1950;
-		$scope.query = 'trip';
+		$scope.movie = '';
+		$scope.year = '';
+		$scope.query = '';
 		$scope.items_per_page = 100;
 		$scope.show_results = true;
 
