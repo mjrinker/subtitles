@@ -2125,3 +2125,21 @@
   font-weight: 300;
   line-height: 1.2;
 }
+
+.page-link-darkslategray {
+  color: #2f4f4f;
+}
+
+.page-link-darkslategray:hover {
+  color: #213838;
+  background-color: #e9ecef;
+}
+
+.page-item-darkslategray.active .page-link {
+  background-color: #2f4f4f;
+  border-color: #2f4f4f;
+}
+
+.page-item-darkslategray.disabled .page-link {
+  color: #6b7c7b;
+}
