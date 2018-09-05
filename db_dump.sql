@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 30, 2018 at 03:47 AM
+-- Generation Time: Sep 05, 2018 at 08:20 PM
 -- Server version: 5.6.40
 -- PHP Version: 5.6.30
 
@@ -21,38 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `subtitles`
 --
-CREATE DATABASE IF NOT EXISTS `subtitles` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `subtitles`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `en_year0`
---
-
-CREATE TABLE `en_year0` (
-  `idx` int(128) NOT NULL,
-  `movie_index` int(128) DEFAULT NULL,
-  `sub_index` int(128) DEFAULT NULL,
-  `h_start` int(4) DEFAULT NULL,
-  `m_start` int(2) DEFAULT NULL,
-  `s_start` int(2) DEFAULT NULL,
-  `ms_start` int(3) DEFAULT NULL,
-  `h_end` int(4) DEFAULT NULL,
-  `m_end` int(2) DEFAULT NULL,
-  `s_end` int(2) DEFAULT NULL,
-  `ms_end` int(3) DEFAULT NULL,
-  `line1` longtext,
-  `line2` longtext,
-  `line3` longtext,
-  `line4` longtext,
-  `line5` longtext,
-  `line6` longtext NOT NULL,
-  `line7` longtext,
-  `line8` longtext,
-  `line9` longtext,
-  `line10` longtext
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -3542,14 +3510,6 @@ CREATE TABLE `movie_index` (
 --
 
 --
--- Indexes for table `en_year0`
---
-ALTER TABLE `en_year0`
-  ADD PRIMARY KEY (`idx`),
-  ADD KEY `index` (`idx`),
-  ADD KEY `movie_index` (`movie_index`);
-
---
 -- Indexes for table `en_year1896`
 --
 ALTER TABLE `en_year1896`
@@ -4484,12 +4444,6 @@ ALTER TABLE `movie_index`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `en_year0`
---
-ALTER TABLE `en_year0`
-  MODIFY `idx` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=882897;
 
 --
 -- AUTO_INCREMENT for table `en_year1896`

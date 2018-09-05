@@ -47,3 +47,16 @@ Features include:
 3. Authentication via Google Firebase
 4. Bootstrap 4 styling
 5. Responsive web design for any device
+
+**NEW** - v1.0.1
+1. Search using movie titles
+2. Show movie title in results
+3. Remove movie id and subtitle id from results
+4. Add movie title to movie page heading
+5. Remove movie id from movie page heading
+6. Add pagination to movie page
+7. Rebrand pagination
+8. Darken color of rows on hover
+9. Move row classes to controller
+10. Add color variables to controller
+
