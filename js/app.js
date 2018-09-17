@@ -38,23 +38,13 @@ myApp.config(['$routeProvider', function($routeProvider) {
 	when('/subs', {
 		templateUrl: 'views/subs.html',
 		controller: 'SubtitlesController',
-		resolve: {
-			currentAuth: function(Authentication) {
-				return Authentication.requireAuth();
-			} // currentAuth
-		} // resolve
 	}).
 	when('/movie/:id/year/:year', {
 		templateUrl: 'views/movie.html',
 		controller: 'MovieController',
-		resolve: {
-			currentAuth: function(Authentication) {
-				return Authentication.requireAuth();
-			} // currentAuth
-		} // resolve
 	}).
 	otherwise({
-		redirectTo: '/login'
+		redirectTo: '/subs'
 	});
 }],
 
